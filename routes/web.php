@@ -26,14 +26,3 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),])->group(fu
     Route::get('/services/get-list', [ServiceController::class, 'getList'])->name('services.get-list');
     Route::resource('/services', ServiceController::class);
     Route::resource('/combos', ComboController::class);
-
-    // admin.roles.store 
-    Route::prefix('admin')
-        ->name('admin.')
-        ->group(function () {
-            Route::resource('users', Admin\UserController::class)->except(['show']);
-            Route::resource('roles', Admin\RoleController::class)->except(['show']);
-            Route::post('/roles/{role}/permissions', [Admin\RoleController::class, 'assignPermissions'])->name('roles.permissions');
-            Route::resource('permissions', Admin\PermissionController::class)->except(['show']);
-        });
-});
